@@ -5,7 +5,7 @@ class BuildingList extends React.Component {
 		//console.log('This is my directory file', this.props.data);
 		//console.log('This is my filterText', this.props.filterText);
 		//console.log('This is my selectedBuilding', this.props.selectedBuilding)
-		const { data, filterText, selectedUpdate } = this.props;
+		const { data, filterText, selectedUpdate, deleteBuilding } = this.props;
 
 		const buildingList = data
 			.filter(name => {
@@ -16,10 +16,14 @@ class BuildingList extends React.Component {
 				return (
 					<tr
 					 key={directory.id}
-					 onClick = {() => selectedUpdate(directory.id)}
-					>
+					 onClick = {() => selectedUpdate(directory.id)} >
 						<td>{directory.code} </td>
 						<td>{directory.name} </td>
+						<td onClick ={() => {if (window.confirm('Do you want to delete building ' + directory.name + '?')) deleteBuilding(directory.id)}}>
+							<button>
+								delete
+							</button>
+						</td>
 					</tr>
 				);
 			})
